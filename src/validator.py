@@ -3,12 +3,13 @@ from pathlib import Path
 import pandas as pd
 import pandera.pandas as pa
 from pandera import Check, Column, DataFrameSchema
+from src.config import SEASON
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 schema = DataFrameSchema(
     {
-        "season": Column(int, Check.equal_to(2024)),
+        "season": Column(int, Check.equal_to(SEASON)),
         "round": Column(int, Check.in_range(1, 24)),
         "driver_id": Column(str, Check.str_length(min_value=1)),
         "constructor_id": Column(str, Check.str_length(min_value=1)),
@@ -18,8 +19,8 @@ schema = DataFrameSchema(
         "race_date": Column(
             pa.DateTime,
             Check.in_range(
-                pd.Timestamp("2024-01-01"),
-                pd.Timestamp("2024-12-31")
+                pd.Timestamp(f"{SEASON}-01-01"),
+                pd.Timestamp(f"{SEASON}-12-31")
             )
         ),
         "is_test_record": Column(bool)
@@ -47,7 +48,7 @@ def validate_data(input_path=None):
     ]
 
     test_records.loc[test_records.index[0], "points"] = -10
-    test_records.loc[test_records.index[1], "race_date"] = "2025-01-01"
+    test_records.loc[test_records.index[1], "race_date"] = f"{SEASON + 1}-01-01"
 
     combined = pd.concat(
         [df, test_records],

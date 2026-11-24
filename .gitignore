@@ -228,3 +228,6 @@ __pycache__/
 .DS_Store
 .env
 data/output_backup.db
+
+echo ".venv_test/" >> .gitignore
+.venv_test/

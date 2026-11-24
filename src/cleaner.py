@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 import numpy as np
+from src.config import SEASON
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -54,7 +55,7 @@ def clean_data():
 
     # Filter records using multiple conditions
     df = df[
-        (df["season"] == 2024)
+        (df["season"] == SEASON)
         & (df["points"] >= 0)
         & (df["laps"] >= 0)
     ].copy()

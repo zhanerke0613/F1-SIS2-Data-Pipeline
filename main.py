@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from src.config import SEASON
 from src.api_client import collect_data
 from src.producer import produce_data
 from src.consumer import consume_data
@@ -15,7 +16,7 @@ DATA_DIR = Path(__file__).resolve().parent / "data"
 
 def main():
     print("=" * 50)
-    print("F1 2024 DATA PIPELINE")
+    print(f"F1 {SEASON} DATA PIPELINE")
     print("=" * 50)
 
     print("\nSTEP 1: API Data Collection")
@@ -52,6 +53,16 @@ def main():
     print("\nSTEP 6: SQLite Database")
     stored = load_data()
 
+    print("\nIDEMPOTENCY TEST: Second Database Load")
+    stored_again = load_data()
+
+    if stored_again != stored:
+        raise RuntimeError("Database idempotency test failed.")
+
+    invalid_count = len(pd.read_csv(
+        DATA_DIR / "invalid_records.csv"
+    ))
+
     print("\nSTEP 7: Exploratory Data Analysis")
     analyze_data()
 
@@ -69,6 +80,8 @@ def main():
     print("Kafka sent:", sent)
     print("Kafka received:", received)
     print("Valid records:", len(valid))
+    print("Invalid records:", invalid_count)
+    print("Idempotency test: PASSED")
     print("Processed records:", len(processed))
     print("Database records:", stored)
     print("Charts generated: 3")

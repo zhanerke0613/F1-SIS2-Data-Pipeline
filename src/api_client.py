@@ -3,7 +3,9 @@ import time
 import pandas as pd
 from pathlib import Path
 
-URL = "https://api.jolpi.ca/ergast/f1/2024/results.json"
+from src.config import SEASON
+
+URL = f"https://api.jolpi.ca/ergast/f1/{SEASON}/results.json"
 
 
 def fetch_page(params):

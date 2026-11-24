@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 import matplotlib.pyplot as plt
+from src.config import SEASON
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -55,7 +56,7 @@ def analyze_data():
         label="Race points"
     )
 
-    plt.title("F1 2024: Race Points by Constructor")
+    plt.title(f"F1 {SEASON}: Race Points by Constructor")
     plt.xlabel("Total Race Points")
     plt.ylabel("Constructor")
     plt.legend()
