@@ -1,0 +1,4 @@
+season,round,race_name,race_date,circuit_id,country,driver_id,driver_name,constructor_id,constructor_name,grid,position,points,laps,status,race_time_ms,fastest_lap_time,is_test_record,validation_error
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,Bahrain,,Carlos Sainz,ferrari,Ferrari,4,3,15,57,Finished,5529852.0,1:34.507,True,"str_length(1, None)"
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,Bahrain,test_driver_1,Max Verstappen,red_bull,Red Bull,1,1,-10,57,Finished,5504742.0,1:32.608,True,"in_range(0, 26)"
+2024,1,Bahrain Grand Prix,2025-01-01,bahrain,Bahrain,test_driver_2,Sergio Pérez,red_bull,Red Bull,5,2,18,57,Finished,5527199.0,1:34.364,True,"in_range(2024-01-01 00:00:00, 2024-12-31 00:00:00)"
